@@ -1,4 +1,10 @@
-// $backgroundColor: #282c34;
+$backgroundColor: #154360;
+$bodyBackground: #e9e5e5;
+$textColor: #f4f4f4;
+$labelColor: #d1c665;
+$inputBg: #a2cada;
+$borderInput: #f4f4f4;
+
 
 html,body{
   overflow-x: hidden;
@@ -8,10 +14,71 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: $bodyBackground;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+label{
+  display: block;
+  color: $labelColor;
+}
+
+input{
+  border-radius: 3px; 
+  outline: none;
+  font-size: 12px;
+  padding: 3px 0;
+}
+
+::placeholder{
+  color: #154360;
+}
+
+.employeesDiv{
+  margin: 0, 10px;
+}
+
+//-------------------------------------EMPLOYEES-----------------------------------------------
+.employeesDiv{
+  background: $backgroundColor;
+  color: $textColor;
+  height: 100vh;
+  
+}
+
+//-------------------------------------EMPLOYEES FORM-----------------------------------------------
+// .formDiv{
+  
+//   width: 1800px;
+// }
+
+.formEmp{
+  display: flex;
+  flex-direction: column;
+  padding: 0 100px;
+  input{
+    border: 2px solid $borderInput; 
+    background: $inputBg;
+    color: #154360;
+    
+  }
 
 
+  .age , .email, .city, .salary {
+    margin: 0 auto;
+ 
+  }
+  
+}
 
+.divUpper, .divDown{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 25px;
+
+}
+
+.age input{
+  width: 162px;
+}
 
