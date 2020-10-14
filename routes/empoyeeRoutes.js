@@ -19,14 +19,38 @@ router.get('/', async(req, res) => {
     
 })
 
+// GET /api/employees/id   ONE EMPLOYEE
+router.get('/:id', async(req, res) => {
+    try {
+        const employees = await Employee.findById(req.params.id);
+        res.json(employees);
+        
+    } catch (err) {
+        console.log(err);
+        res.status(500).json('Internal Server Error')
+    }
+    
+    
+})
+
 // POST /api/employees
 router.post('/', async(req, res) => {
-    
+    const {firstName, lastName, age, email, department, position, city, salary} = req.body;
+
     try {
-        const newEmployee = await new Employee(req.body);
+        const newEmployee = await new Employee({
+            firstName, 
+            lastName, 
+            age, 
+            email, 
+            department, 
+            position, 
+            city, 
+            salary
+        });
         const employee = await newEmployee.save(); //saveing in DB
      
-        res.json(employee);
+        res.status(201).json(employee);
 
     } catch (err) {
         console.log(err);
@@ -36,37 +60,39 @@ router.post('/', async(req, res) => {
     
 })
 
+// PUT /api/employees:id   Update
+router.put('/:id', async(req, res) => {
+    try {
+        const employee = await Employee.findById(req.params.id)
+        if(!employee)return res.status(404).json({msg: 'Employee Not Found!'});
 
-// // PUT /api/employees:id   Update
-// router.put('/:id', async(req, res) => {
-//     try {
-//         const newEmployee = await new Employee({req.body})
-//         const employee = await newEmployee.save();//saveing in DB
+        const employeeUpdated = await Employee.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+        res.json(employeeUpdated);
 
-//         res.json(employee)
-
-//     } catch (err) {
-//         console.log(err);
-//          res.status(500).send('Internal Server Error')
-//     }
+    } catch (err) {
+        console.log(err);
+         res.status(500).send('Internal Server Error')
+    }
     
     
-// })
-// // DELETE /api/employees:id
-// router.delete('/:id', async(req, res) => {
-//     try {
-//         const newEmployee = await new Employee({req.body})
-//         const employee = await newEmployee.save();//saveing in DB
-//         
+})
 
-//         res.json(employee)
+// DELETE /api/employees/:id
+router.delete('/:id', async(req, res) => {
+    try {
+       
+        const employeeDelete = await Employee.findById(req.params.id)
+        if(!employeeDelete)return res.status(404).json({msg: 'Employee Not Found!'});
 
-//     } catch (err) {
-//         console.log(err);
-//          res.status(500).send('Internal Server Error')
-//     }
+        await Employee.findByIdAndRemove(req.params.id)
+        res.json({msg: 'Employee Remove'})
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error')
+    }
     
     
-// })
+})
 
 module.exports = router;
