@@ -3,7 +3,8 @@ $bodyBackground: #e9e5e5;
 $textColor: #f4f4f4;
 $labelColor: #d1c665;
 $inputBg: #a2cada;
-$borderInput: #f4f4f4;
+$successBtn: #50a11a;
+$hoverSuccess: #6eb142;
 
 
 html,body{
@@ -24,10 +25,29 @@ label{
 }
 
 input{
+  border:none;
+  border-radius: 3px; 
+  outline: none;
+  font-size: 12px;
+  padding: 3px 4px ;
+}
+
+button{
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+ 
+}
+
+select {
+  border:none;
   border-radius: 3px; 
   outline: none;
   font-size: 12px;
   padding: 3px 0;
+  width: 155px;
+  
 }
 
 ::placeholder{
@@ -46,23 +66,36 @@ input{
   
 }
 
-//-------------------------------------EMPLOYEES FORM-----------------------------------------------
-// .formDiv{
+.empTable{
+  border: 1px solid;
+  margin: 0 auto;
   
-//   width: 1800px;
-// }
+  th{
+    color: $labelColor;
+  }
+}
+
+//-------------------------------------EMPLOYEES FORM-----------------------------------------------
+
+.formDiv{
+  margin-bottom: 50px;
+}
 
 .formEmp{
   display: flex;
   flex-direction: column;
   padding: 0 100px;
-  input{
-    border: 2px solid $borderInput; 
+  
+  input, select{
     background: $inputBg;
     color: #154360;
     
   }
 
+  // &:last-child{
+  //   text-align: center;
+  // }
+ 
 
   .age , .email, .city, .salary {
     margin: 0 auto;
@@ -76,6 +109,19 @@ input{
   grid-template-columns: repeat(4, 1fr);
   margin-bottom: 25px;
 
+}
+
+.submitBtn{
+  width: 30%;
+  padding: 4px 0;
+  color: $textColor;
+  background: $successBtn;
+  margin: 0 auto;
+  
+
+  &:hover{
+    background: $hoverSuccess;
+  }
 }
 
 .age input{

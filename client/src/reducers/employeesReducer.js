@@ -1,4 +1,4 @@
-
+import {GET_EMPLOYEES, POST_EMPLOYEES} from '../utility/types'
 
 
 const initState = {
@@ -6,10 +6,21 @@ const initState = {
 }
 
 
-export default (state = initState, actions) => {
+export default (state = initState, action) => {
 
-    switch (actions.type) {
+    switch (action.type) {
         
+        case GET_EMPLOYEES:
+            return{
+                ...state,
+                employeesList: action.payload
+            }
+
+        case POST_EMPLOYEES:
+            return{
+                ...state,
+                employeesList: [action.payload, ...state.employeesList]
+            }
         
         default:
             return state;

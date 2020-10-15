@@ -5,10 +5,10 @@ const Employee = require('../models/Employee');
 
 const router = express.Router();
 
-// GET /api/employees
+// GET /api/employees ALL EMPLOYEES
 router.get('/', async(req, res) => {
     try {
-        const employees = await Employee.find();
+        const employees = await Employee.find().sort({createdAt: -1});
         res.json(employees);
         
     } catch (err) {
