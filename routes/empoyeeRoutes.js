@@ -60,13 +60,25 @@ router.post('/', async(req, res) => {
     
 })
 
-// PUT /api/employees:id   Update
+// PUT /api/employees/:id   Update
 router.put('/:id', async(req, res) => {
+    const {firstName, lastName, age, email, department, position, city, salary} = req.body
+    
+    const employeeFields = {}
+    if(firstName)employeeFields.firstName = firstName;
+    if(lastName)employeeFields.lastName = lastName;
+    if(age)employeeFields.age = age;
+    if(email)employeeFields.email = email;
+    if(department)employeeFields.department = department;
+    if(position)employeeFields.position = position;
+    if(city)employeeFields.city = city;
+    if(salary)employeeFields.salary = salary;
+
     try {
         const employee = await Employee.findById(req.params.id)
         if(!employee)return res.status(404).json({msg: 'Employee Not Found!'});
 
-        const employeeUpdated = await Employee.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+        const employeeUpdated = await Employee.findByIdAndUpdate(req.params.id, {$set: employeeFields}, {new: true})
         res.json(employeeUpdated);
 
     } catch (err) {

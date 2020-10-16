@@ -3,7 +3,7 @@ import React, {Fragment} from 'react'
 
 
 
-const EmployeeSelect = ({optionValues}) => {
+const EmployeeSelect = ({optionValues, department}) => {
     return (
         <Fragment>
             <option value={optionValues}>{optionValues}</option>

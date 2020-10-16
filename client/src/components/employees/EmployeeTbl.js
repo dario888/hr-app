@@ -1,9 +1,17 @@
 import React, {Fragment} from 'react'
+import { useDispatch } from 'react-redux'
+
+import { getCurrent, deleteEmployees } from '../../actions/employeesActions'
 
 
 
 
-const EmployeeTbl = ({employeesList}) => {
+const EmployeeTbl = ({employee}) => {
+
+    const dispatch = useDispatch();
+
+    //React:validateDOMnesting warning (must use ternary intead &&)
+
     return (
         <Fragment>
             <table className="empTable">
@@ -20,9 +28,9 @@ const EmployeeTbl = ({employeesList}) => {
                     </tr>
                 </thead>
                 <tbody className="empTblBody">                
-                    {//React:validateDOMnesting warning (must use ternary intead &&)
-                        employeesList.length ? employeesList.map((employee) => 
-                        <tr key={employee._id}>
+                    {
+                       
+                        <tr >
                             <td>{employee.firstName}</td>
                             <td>{employee.lastName}</td>
                             <td>{employee.age}</td>
@@ -31,10 +39,21 @@ const EmployeeTbl = ({employeesList}) => {
                             <td>{employee.position}</td>
                             <td>{employee.city}</td>
                             <td>{employee.salary}</td>
-                            <td>Edt</td>
-                            <td>Delete</td>
-                        </tr> ) 
-                        : null
+                            <td>
+                                <button id="empEditBtn" type="button" onClick={() => dispatch(getCurrent(employee))}>
+                                    Edt
+                                </button>
+                            </td>
+                            <td>
+                                <button id="empDeleteBtn" type="button" onClick={() => 
+                                    dispatch(deleteEmployees(employee._id))
+                                }>
+                                    Delete
+                                </button>
+                            </td>
+
+                        </tr> 
+
                     }
                 </tbody>
             </table>

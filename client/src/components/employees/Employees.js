@@ -25,7 +25,12 @@ const Employee = () => {
     return (
         <div className="employeesDiv">
             <EmployeeForm />
-            <EmployeeTbl employeesList={employeesList} />
+            {
+                employeesList.length && employeesList.map((employee) => 
+                    <EmployeeTbl key={employee._id} employee={employee} />
+                
+                )
+            }
 
             
         </div>

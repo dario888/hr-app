@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_EMPLOYEE, GET_EMPLOYEES, DELETE_EMPLOYEES, UPDATE_EMPLOYEES, POST_EMPLOYEES } from '../utility/types';
+import {GET_EMPLOYEE, GET_EMPLOYEES, DELETE_EMPLOYEES, UPDATE_EMPLOYEES, POST_EMPLOYEES, SET_CURRENT, CLEAR_CURRENT } from '../utility/types';
 
 
 //GET EMPLOYEES
@@ -36,7 +36,7 @@ export const postEmployees = (employee) => async(dispatch) => {
     }
 
     try {
-        const res = await axios('/api/employees', employee, config);
+        const res = await axios.post('/api/employees', employee, config);
         // console.log(res.data);
         dispatch({type: POST_EMPLOYEES, payload: res.data})
 
@@ -46,9 +46,15 @@ export const postEmployees = (employee) => async(dispatch) => {
 }
 
 //UPDATE EMPLOYEES
-export const updateEmployees = () => async(dispatch) => {
+export const updateEmployees = (employee) => async(dispatch) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
     try {
-        const res = await axios('/api/employees');
+        const res = await axios.put(`/api/employees/${employee._id}`, employee, config );
         // console.log(res.data);
         dispatch({type: UPDATE_EMPLOYEES, payload: res.data})
 
@@ -58,17 +64,19 @@ export const updateEmployees = () => async(dispatch) => {
 }
 
 //DELETE EMPLOYEES
-export const deleteEmployees = () => async(dispatch) => {
+export const deleteEmployees = (id) => async(dispatch) => {
     try {
-        const res = await axios('/api/employees');
+        await axios.delete(`/api/employees/${id}`);
         // console.log(res.data);
-        dispatch({type: DELETE_EMPLOYEES, payload: res.data})
+        dispatch({type: DELETE_EMPLOYEES, payload: id})
 
     } catch (error) {
         console.log(error);
     }
 }
 
+export const getCurrent = (current) => ({type: SET_CURRENT, payload: current}) 
 
+export const clearCurrent = () => ({type: CLEAR_CURRENT}) 
 
 
