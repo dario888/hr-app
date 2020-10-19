@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const connectDB = require('./connectDB');
 
 // Import Routes
@@ -13,8 +14,9 @@ const positionsRoutes = require('./routes/positionsRoutes');
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
- //Conntecting to MongoDb Atlas
+//Conntecting to MongoDb Atlas
 connectDB();
 
 

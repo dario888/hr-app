@@ -29,7 +29,8 @@ input{
   border-radius: 3px; 
   outline: none;
   font-size: 12px;
-  padding: 3px 4px ;
+  padding: 6px 4px;
+  width: 80%;
 }
 
 button{
@@ -92,16 +93,20 @@ select {
     
   }
 
-  // &:last-child{
-  //   text-align: center;
+  // .age, .email, .city, .salary {
+  //   margin: 0 0;
+ 
   // }
- 
 
-  .age , .email, .city, .salary {
-    margin: 0 auto;
- 
-  }
+}
+
+.selectDepartment{
+  cursor: pointer;
   
+}
+
+.css-yk16xz-control{
+  cursor: pointer;
 }
 
 .divUpper, .divDown{
@@ -124,7 +129,7 @@ select {
   }
 }
 
-.age input{
-  width: 162px;
-}
+// .age input{
+//   width: 162px;
+// }
 

@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
-import {getDepartmens} from '../../actions/departmensActons'
-import {getPositions} from '../../actions/positionsActions'
+import {getDepartmens, clearDepartment} from '../../actions/departmensActons'
+import {getPositions, clearPosition} from '../../actions/positionsActions'
 import {getEmployees, postEmployees, updateEmployees, clearCurrent} from '../../actions/employeesActions'
-import EmployeeSelect from './EmployeeSelect';
+import PositionSelector from './PositionSelector';
+import DepartmentSelector from './DepartmentSelector';
+
+// import EmployeeSelect from './EmployeeSelect';
 
 
 
 const EmployeeForm = () => {
     
+    // const [department, setDepartment] = useState(null);
     const [employee, setEmployee] = useState({
         firstName: '',
         lastName: '',
@@ -24,14 +28,18 @@ const EmployeeForm = () => {
     //Destructoring employee object
     const {firstName, lastName, age, email, city, salary} = employee;
 
-    const {departmentsList, positionsList, currentEmployee} = useSelector(state => ({
+    const {departmentsList, positionsList, currentEmployee, departmentVal, positionVal} = useSelector(state => ({
         departmentsList: state.departments.departmentsList,
+        departmentVal: state.departments.department,
+        positionVal: state.positions.position,
         positionsList: state.positions.positionsList,
         currentEmployee: state.employees.current,
 
     }));
 
     // console.log(currentEmployee);
+    // console.log(employee);
+    // console.log(departmentVal);
 
 
     const dispatch = useDispatch();
@@ -43,10 +51,22 @@ const EmployeeForm = () => {
         //eslint-disable-next-line
     },[])
 
+    // Set departmentEmployee if department has value
+    useEffect(() => {
+        if(departmentVal){
+            setEmployee({...employee, department: departmentVal})
+        }
+
+        if(positionVal){
+            setEmployee({...employee, position: positionVal})
+        }
+        
+        // eslint-disable-next-line
+    }, [departmentVal, positionVal]);
+   
     useEffect(() => {
         dispatch(getEmployees())
         
-
         // eslint-disable-next-line
     }, [employee]);
 
@@ -54,7 +74,12 @@ const EmployeeForm = () => {
     useEffect(() => {
         if(currentEmployee){
             setEmployee(currentEmployee)
-        } 
+
+        } else{
+            setEmployee({firstName:'', lastName:'', age:'', email:'', department: '', position:'', city:'', salary:''});
+            dispatch(clearDepartment());
+            dispatch(clearPosition());
+        }
        
         // eslint-disable-next-line
     }, [currentEmployee]);
@@ -67,24 +92,27 @@ const EmployeeForm = () => {
 
     const submitHendler = (e) => {
         e.preventDefault();
-        // console.log(employee);
         // Parse from string to number
         employee.age = Number(employee.age); 
         employee.salary = Number(employee.salary);
 
         if(currentEmployee){
-            dispatch(updateEmployees(employee))
-            dispatch(clearCurrent())
+            // console.log(employee);
+            dispatch(updateEmployees(employee));
+            dispatch(clearCurrent());
+           
 
         } else {
             dispatch(postEmployees(employee));
-            setEmployee({firstName:'', lastName:'', age:'', email:'', city:'', salary:''});
+            setEmployee({firstName:'', lastName:'', age:'', email:'', department: '', position:'', city:'', salary:''});
 
-        }
-       
+            dispatch(clearDepartment());
+            dispatch(clearPosition());
+
+            console.log(employee);
+        } 
        
     }
-
 
     return (
         <div className="formDiv">  
@@ -92,7 +120,7 @@ const EmployeeForm = () => {
                 <div className="divUpper">
                     <div className="firstName">
                         <label>First Name</label>
-                        <input type="text" name="firstName" value={firstName} minLength={2}  maxLength={20}  
+                        <input type="text" name="firstName" value={firstName} minLength={2} maxLength={20}  
                         onChange={onChangeHendler} placeholder="min 2, max 20 chars" required  />
                     </div>
                     <div className="lastName">
@@ -114,28 +142,15 @@ const EmployeeForm = () => {
                 <div className="divDown">
                     <div className="department">
                         <label>Department</label>
-                        <select id="dropdown" name="department" onChange={onChangeHendler} required>
-                             <option value="department" >department...</option>
-                            {
-                                departmentsList.length && departmentsList.map((dept) => 
-                                <EmployeeSelect key={dept._id} optionValues={dept.name} /> )
-                            }
-                            
-                         </select>
+                        <DepartmentSelector departmentsList={departmentsList}  />
                     </div>
                     <div className="position">
                         <label>Position</label>
-                        <select id="dropdown2" name="position" onChange={onChangeHendler} required>
-                            <option value="position" id="defaultOpt">position...</option>
-                            {
-                                positionsList.length && positionsList.map((position) => 
-                                <EmployeeSelect key={position._id} optionValues={position.name} />)
-                            }                        
-                         </select>
+                        <PositionSelector  positionsList={positionsList} />
                     </div>
                     <div className="city">
                         <label>City</label>
-                        <input type="text" name="city" value={city} placeholder="City"
+                        <input type="text" name="city" value={city} placeholder="select city..."
                         onChange={onChangeHendler} required/>
                     </div>
                     <div className="salary">
@@ -144,7 +159,9 @@ const EmployeeForm = () => {
                         onChange={onChangeHendler} min={1}  placeholder="amount..." />
                     </div>
                 </div>
-                <button type="submit" className="submitBtn">Submit Employee</button>
+                <button type="submit" className="submitBtn">
+                    {currentEmployee ? 'Update Employee' : 'Submit Employee'}
+                </button>
             </form>            
         </div>
     )

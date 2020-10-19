@@ -1,7 +1,8 @@
-import { GET_DEPARTMENTS} from '../utility/types'
+import { GET_DEPARTMENTS, SET_DEPARTMENT, CLEAR_DEPARTMENT} from '../utility/types'
 
 const initState = {
-    departmentsList: []
+    departmentsList: [],
+    department: null
 }
 
 
@@ -12,6 +13,18 @@ export default (state = initState, action) => {
             return{
                 ...state,
                 departmentsList: action.payload
+            }
+
+        case SET_DEPARTMENT:
+            return{
+                ...state,
+                department: action.payload
+            }
+        
+        case CLEAR_DEPARTMENT:
+            return{
+                ...state,
+                department: null
             }
         
         default:

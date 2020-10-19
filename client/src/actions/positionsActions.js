@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_POSITIONS} from '../utility/types';
+import {GET_POSITIONS, SET_POSITION, CLEAR_POSITION} from '../utility/types';
 
 
 
@@ -16,3 +16,7 @@ export const getPositions = () => async(dispatch) => {
         console.log(error);
     }
 }
+
+export const setPosition = (position) => ({type: SET_POSITION, payload: position})
+
+export const clearPosition = () => ({type: CLEAR_POSITION})

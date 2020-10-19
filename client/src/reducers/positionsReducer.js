@@ -1,7 +1,8 @@
-import { GET_POSITIONS } from '../utility/types'
+import { GET_POSITIONS, SET_POSITION, CLEAR_POSITION } from '../utility/types'
 
 const initState = {
-    positionsList: []
+    positionsList: [],
+    position: null
 }
 
 
@@ -12,6 +13,18 @@ export default (state = initState, action) => {
             return{
                 ...state,
                 positionsList: action.payload
+            }
+
+        case SET_POSITION:
+            return{
+                ...state,
+                position: action.payload
+            }
+            
+        case CLEAR_POSITION:
+            return{
+                ...state,
+                position: null
             }
         
         default:

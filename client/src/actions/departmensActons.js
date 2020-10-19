@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_DEPARTMENTS} from '../utility/types';
+import {GET_DEPARTMENTS, SET_DEPARTMENT, CLEAR_DEPARTMENT} from '../utility/types';
 
 
 
@@ -14,3 +14,7 @@ export const getDepartmens = () => async(dispatch) => {
         console.log(error);
     }
 }
+
+export const setDepartment = (depart) => ({type: SET_DEPARTMENT, payload: depart})
+
+export const clearDepartment = () => ({type: CLEAR_DEPARTMENT})
