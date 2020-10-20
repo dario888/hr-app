@@ -25,12 +25,26 @@ const Employee = () => {
     return (
         <div className="employeesDiv">
             <EmployeeForm />
-            {
-                employeesList.length && employeesList.map((employee) => 
-                    <EmployeeTbl key={employee._id} employee={employee} />
-                
-                )
-            }
+            <table className="empTable">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>City</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                    {
+                        employeesList.length ? employeesList.map((employee) => 
+                            <EmployeeTbl key={employee._id} employee={employee} />
+                        
+                        ) : null
+                    }
+            </table>
 
             
         </div>

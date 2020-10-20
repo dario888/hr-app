@@ -1,10 +1,4 @@
-$backgroundColor: #154360;
-$bodyBackground: #e9e5e5;
-$textColor: #f4f4f4;
-$labelColor: #d1c665;
-$inputBg: #a2cada;
-$successBtn: #50a11a;
-$hoverSuccess: #6eb142;
+@import 'utility';
 
 
 html,body{
@@ -15,13 +9,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: $bodyBackground;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 label{
   display: block;
   color: $labelColor;
+  margin-bottom: 5px;
 }
 
 input{
@@ -29,8 +23,10 @@ input{
   border-radius: 3px; 
   outline: none;
   font-size: 12px;
-  padding: 6px 4px;
+  padding: 0px 4px;
   width: 80%;
+  height: 30px;
+
 }
 
 button{
@@ -38,21 +34,21 @@ button{
   outline: none;
   border-radius: 4px;
   cursor: pointer;
- 
+
 }
 
-select {
-  border:none;
-  border-radius: 3px; 
-  outline: none;
-  font-size: 12px;
-  padding: 3px 0;
-  width: 155px;
+// select {
+//   border:none;
+//   border-radius: 3px; 
+//   outline: none;
+//   font-size: 12px;
+//   padding: 3px 0;
+//   width: 155px;
   
-}
+// }
 
 ::placeholder{
-  color: #154360;
+  color: #45bceb;
 }
 
 .employeesDiv{
@@ -79,34 +75,26 @@ select {
 //-------------------------------------EMPLOYEES FORM-----------------------------------------------
 
 .formDiv{
-  margin-bottom: 50px;
+  margin: 100px 30px 50px;
+  background: $formBg;
+  border-radius: 12px;
 }
 
 .formEmp{
   display: flex;
   flex-direction: column;
-  padding: 0 100px;
+  padding: 40px 80px;
   
-  input, select{
-    background: $inputBg;
-    color: #154360;
+  input{
+    background: $inputFormBg;
+    color: $textInputColor;
+    border: 1px solid $backgroundColor;
     
+    &:hover{
+      box-shadow: 0 0 2px 1px $backgroundColor;
+    }
   }
-
-  // .age, .email, .city, .salary {
-  //   margin: 0 0;
  
-  // }
-
-}
-
-.selectDepartment{
-  cursor: pointer;
-  
-}
-
-.css-yk16xz-control{
-  cursor: pointer;
 }
 
 .divUpper, .divDown{
@@ -119,17 +107,17 @@ select {
 .submitBtn{
   width: 30%;
   padding: 4px 0;
-  color: $textColor;
+  color: $backgroundColor;
   background: $successBtn;
   margin: 0 auto;
   
-
   &:hover{
     background: $hoverSuccess;
+    box-shadow: 0 0 2px 2px $backgroundColor;
   }
+
 }
 
-// .age input{
-//   width: 162px;
-// }
+//-------------------------------------EMPLOYEES TABLE-----------------------------------------------
+
 

@@ -2,10 +2,12 @@ import React, { useState, Fragment} from 'react';
 import { useDispatch, useSelector } from 'react-redux' 
 import Select from 'react-select';
 import {setDepartment} from '../../actions/departmensActons'
+import {customStyles} from '../../style/customStyles'
 
 
 //setDepartment, department
 const DepartmentSelector = ({departmentsList }) => {
+    
     const [stateValue, setStateValue] = useState(null)
 
     const {departmentVal, current} = useSelector((state) => ({
@@ -41,8 +43,8 @@ const DepartmentSelector = ({departmentsList }) => {
     return (
         <Fragment>
             <Select options={optionsDepartment()}  placeholder="departments..." isSearchable
-            className="selectDepartment" onChange={handleChange} 
-            value={departmentVal ? stateValue : curentDept ? curentDept : null} />
+            styles={customStyles} onChange={handleChange} 
+            value={departmentVal ? stateValue : curentDept ? curentDept : null}  />
         </Fragment>
     )
     

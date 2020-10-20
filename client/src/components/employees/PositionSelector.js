@@ -2,7 +2,7 @@ import React, {useState, Fragment} from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux'  
 import {setPosition} from '../../actions/positionsActions'
-
+import {customStyles} from '../../style/customStyles'
 
 
 
@@ -76,7 +76,7 @@ const PositionSelector = ({positionsList}) => {
     return (
         <Fragment>
             <Select options={optionsPositions()}  placeholder="positions... " className="selectOptions"
-            onChange={handleChange} isSearchable
+            onChange={handleChange} isSearchable styles={customStyles}
             value={positionVal ? stateValue : currentPosition ? currentPosition : null} />
         </Fragment>
     )
