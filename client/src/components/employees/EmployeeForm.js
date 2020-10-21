@@ -109,7 +109,7 @@ const EmployeeForm = () => {
             dispatch(clearDepartment());
             dispatch(clearPosition());
 
-            console.log(employee);
+            // console.log(employee);
         } 
        
     }

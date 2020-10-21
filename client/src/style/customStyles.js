@@ -19,6 +19,7 @@ export const customStyles = {
         height: '30px',
         fontSize: '14px',
         cursor: 'pointer',
+        color: '#45bceb',
 
         ':hover':{
             boxShadow: '0px 0px 2px 1px #c7cacc'
@@ -31,6 +32,7 @@ export const customStyles = {
         padding:0,
         margin: 0,
         width: '85%',
+        color: '#45bceb',
 
     }),
 
@@ -49,18 +51,21 @@ export const customStyles = {
     indicatorContainer:(provided,state) => ({
         ...provided,
         height: '30px',
+        color: '#45bceb',
     }),
 
     valueContainer:(provided,state) => ({
         ...provided,
         height: '30px',
         padding:'0px 6px',
+        color: '#45bceb',
               
     }),
    
     singleValue:(provided,state) => ({
         ...provided,
         paddingTop:'6px',
+        color: '#45bceb',
         
     }),
 

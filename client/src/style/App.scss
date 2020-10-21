@@ -37,45 +37,34 @@ button{
 
 }
 
-// select {
-//   border:none;
-//   border-radius: 3px; 
-//   outline: none;
-//   font-size: 12px;
-//   padding: 3px 0;
-//   width: 155px;
-  
-// }
-
 ::placeholder{
   color: #45bceb;
 }
 
-.employeesDiv{
-  margin: 0, 10px;
-}
+// .employeesDiv{
+//   margin: 0, 10px;
+// }
+
+
 
 //-------------------------------------EMPLOYEES-----------------------------------------------
 .employeesDiv{
-  background: $backgroundColor;
+  background: url('../assetes/tblemployee.jpg')no-repeat center center/cover;
   color: $textColor;
   height: 100vh;
+  padding-bottom: 25px;
+  padding-top: 80px;
   
 }
 
-.empTable{
-  border: 1px solid;
-  margin: 0 auto;
-  
-  th{
-    color: $labelColor;
-  }
+.displayTbl{
+  height: 100%;
 }
 
 //-------------------------------------EMPLOYEES FORM-----------------------------------------------
 
 .formDiv{
-  margin: 100px 30px 50px;
+  margin: 0 30px 50px;
   background: $formBg;
   border-radius: 12px;
 }
@@ -120,4 +109,51 @@ button{
 
 //-------------------------------------EMPLOYEES TABLE-----------------------------------------------
 
+.empTable{
+  border: 2px solid $formBg;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 0 auto;
+  border-spacing: 20px;
+  background: $tblBg;
+  
 
+  th{
+    color: $tblHeder;
+    text-align: left;
+  }
+
+  td{
+    color: $tblData;
+   
+  }
+}
+
+// .empTblBody{
+
+// }
+
+#empEditBtn{
+ @include tblButtons($tblBtnEdit);
+  
+ &:hover{
+  box-shadow: 0 0 0 2px #0e3fc7;
+  background:#38697e;
+ }
+ 
+}
+
+#empDeleteBtn{
+  @include tblButtons($tblBtnDel);
+
+  &:hover{
+    box-shadow: 0 0 0 2px #24c70e;
+    background: #d12222;
+  }
+}
+
+#typed{
+  text-align: center;
+  font-family: monospace;
+  color: #d85353;
+}

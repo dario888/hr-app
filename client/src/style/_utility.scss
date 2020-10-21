@@ -1,9 +1,25 @@
 $backgroundColor: #c7cacc;
 $textColor: #333;
+// From colors
+$formBg: #154360;
 $textInputColor: #45bceb;
 $labelColor: #d1c665;
 $inputFormBg: #3a5e6d;
 $inputHoverBg: #d9e288;
 $successBtn: #50a11a;
 $hoverSuccess: #4b8823;
-$formBg: #154360;
+// table colors
+$tblBg: #3a6785;
+$tblHeder: #aebabe;
+$tblData: #b2d0e2;
+$tblBtnEdit: #2493a7;
+$tblBtnDel:#cf4343;
+
+
+@mixin tblButtons($colorBg) {
+    padding: 5px 10px;
+    background: $colorBg;
+    color: $backgroundColor;
+    margin: 0 5px;
+    
+}
