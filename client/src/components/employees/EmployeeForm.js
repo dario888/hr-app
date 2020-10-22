@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 import {getDepartmens, clearDepartment} from '../../actions/departmensActons'
 import {getPositions, clearPosition} from '../../actions/positionsActions'
-import {getEmployees, postEmployees, updateEmployees, clearCurrent} from '../../actions/employeesActions'
+import {postEmployees, updateEmployees, clearCurrent} from '../../actions/employeesActions'
 import PositionSelector from './PositionSelector';
 import DepartmentSelector from './DepartmentSelector';
+import Alert from '../Alert';
 
-// import EmployeeSelect from './EmployeeSelect';
 
 
 
 const EmployeeForm = () => {
     
-    // const [department, setDepartment] = useState(null);
+    const dispatch = useDispatch();
     const [employee, setEmployee] = useState({
         firstName: '',
         lastName: '',
@@ -25,8 +25,13 @@ const EmployeeForm = () => {
         salary: '',
     })
 
-    //Destructoring employee object
-    const {firstName, lastName, age, email, city, salary} = employee;
+    const [messageError, setMessageError] = useState('');
+    const [displayError, setDisplayError] = useState('');
+    const [toggleInputs, setToggleInputs] = useState({toggleFn: false, toggleLn: false, toggleCity: false, });
+
+    //Destructoring objects
+    const {firstName, lastName, age, email, department, position, city, salary} = employee;
+    const {toggleFn, toggleLn, toggleCity} = toggleInputs;
 
     const {departmentsList, positionsList, currentEmployee, departmentVal, positionVal} = useSelector(state => ({
         departmentsList: state.departments.departmentsList,
@@ -40,9 +45,6 @@ const EmployeeForm = () => {
     // console.log(currentEmployee);
     // console.log(employee);
     // console.log(departmentVal);
-
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getDepartmens());
@@ -63,18 +65,19 @@ const EmployeeForm = () => {
         
         // eslint-disable-next-line
     }, [departmentVal, positionVal]);
-   
+
     useEffect(() => {
-        dispatch(getEmployees())
-        
+        if(!messageError){
+            setDisplayError('');        
+        }
+      
         // eslint-disable-next-line
-    }, [employee]);
+    }, [messageError]);
 
     // When current is change update employee in useState
     useEffect(() => {
         if(currentEmployee){
             setEmployee(currentEmployee)
-
         } else{
             setEmployee({firstName:'', lastName:'', age:'', email:'', department: '', position:'', city:'', salary:''});
             dispatch(clearDepartment());
@@ -84,24 +87,68 @@ const EmployeeForm = () => {
         // eslint-disable-next-line
     }, [currentEmployee]);
 
+    const testError = (msg) => {
+        setMessageError(msg);
+        setTimeout(() => {
+            setDisplayError('displayNone')
+            setMessageError('')
+            setToggleInputs({toggleFn: false, toggleLn: false, toggleCity: false, })
+        
+        },3000)    
+        
+    };
    
-
     //Setting  Employee fields 
     const onChangeHendler = (e) => setEmployee({ ...employee, [e.target.name]: e.target.value});
 
-
+    //Submiting the form
     const submitHendler = (e) => {
         e.preventDefault();
         // Parse from string to number
-        employee.age = Number(employee.age); 
-        employee.salary = Number(employee.salary);
+        if(age && salary){
+            employee.age = Number(employee.age); 
+            employee.salary = Number(employee.salary);
+        }
+        if(!department)return testError('Please enter Department.')
+        
+        if(!position)return testError('Please enter Position.')
+        
+
+        if(/[^a-zA-Z]/gi.test(firstName) ) {
+            setEmployee({...employee, firstName: ''});
+            setToggleInputs({...toggleInputs, toggleFn: true})
+            return testError('Please enter only latters, exclude: characters, numbers, spaces.')
+    
+        } else if( /^[a-z]/g.test(firstName)){
+            setToggleInputs({...toggleInputs, toggleFn: true})
+            return testError('The first character should be Upper case.')
+        }
+    
+        if(/[^a-zA-Z]/gi.test(lastName)) {
+            setEmployee({...employee, lastName: ''});
+            setToggleInputs({...toggleInputs, toggleLn: true})
+            return testError('Please enter only latters, exclude: characters, numbers, spaces.')
+    
+        } else if( /^[a-z]/g.test(lastName)){
+            setToggleInputs({...toggleInputs, toggleLn: true})
+            return testError('The first character should be Upper case.')
+        }
+    
+        if(/[^a-zA-Z]/gi.test(city) ) {
+            setEmployee({...employee, city: ''});  
+            setToggleInputs({...toggleInputs, toggleCity: true});        
+            return testError('Please enter only latters, exclude: characters, numbers, spaces.')
+    
+        } else if( /^[a-z]/g.test(city)){
+            setToggleInputs({...toggleInputs, toggleCity: true});
+            return testError('The first character should be Upper case.')
+        }
+        
 
         if(currentEmployee){
-            // console.log(employee);
             dispatch(updateEmployees(employee));
             dispatch(clearCurrent());
            
-
         } else {
             dispatch(postEmployees(employee));
             setEmployee({firstName:'', lastName:'', age:'', email:'', department: '', position:'', city:'', salary:''});
@@ -109,49 +156,61 @@ const EmployeeForm = () => {
             dispatch(clearDepartment());
             dispatch(clearPosition());
 
-            // console.log(employee);
         } 
        
     }
 
+    // console.log('Gobal:',employee);
+    // console.log('State Msg:', messageError);
+    // console.log('First Name:', toggleFn);
+    // console.log('Last Name:', toggleLn);
+    
+
+
     return (
+        <Fragment>
         <div className="formDiv">  
             <form className="formEmp" onSubmit={submitHendler}>
                 <div className="divUpper">
                     <div className="firstName">
                         <label>First Name</label>
-                        <input type="text" name="firstName" value={firstName} minLength={2} maxLength={20}  
+                        <input type="text" name="firstName" value={firstName} minLength={2} maxLength={20} 
                         onChange={onChangeHendler} placeholder="min 2, max 20 chars" required  />
+                        { messageError && toggleFn ? <Alert messageError={messageError} displayError={displayError} /> : null}
                     </div>
                     <div className="lastName">
                         <label>Last Name</label>
-                        <input type="text" name="lastName" value={lastName} minLength={2}  maxLength={20} 
-                        onChange={onChangeHendler} placeholder="min 2, max 20 chars" required/>
+                        <input type="text" name="lastName" value={lastName} minLength={2} maxLength={20} required
+                        onChange={onChangeHendler} placeholder="min 2, max 20 chars" />
+                        {messageError && toggleLn ? <Alert messageError={messageError} displayError={displayError} /> : null}
                     </div>
                     <div className="age">   
                         <label>Age</label>
-                        <input type="number" name="age"  value={age} min={18} max={67} 
+                        <input type="number" name="age" value={age} min={18} max={67} 
                         placeholder="age range 18-67" onChange={onChangeHendler} required />
                     </div>
                     <div className="email">
                         <label>Email</label>
-                        <input type="email" name="email" value={email} placeholder="Email" 
-                        onChange={onChangeHendler} required />
+                        <input type="email" name="email" value={email} placeholder="Email" required
+                        onChange={onChangeHendler}  />
                     </div>
                 </div>
                 <div className="divDown">
                     <div className="department">
                         <label>Department</label>
-                        <DepartmentSelector departmentsList={departmentsList}  />
+                        <DepartmentSelector departmentsList={departmentsList} />
+                        { messageError && !department ? <Alert messageError={messageError} displayError={displayError} /> : null}
                     </div>
                     <div className="position">
                         <label>Position</label>
-                        <PositionSelector  positionsList={positionsList} />
+                        <PositionSelector positionsList={positionsList} />
+                        { messageError && !position ? <Alert messageError={messageError} displayError={displayError} /> : null}
                     </div>
                     <div className="city">
                         <label>City</label>
-                        <input type="text" name="city" value={city} placeholder="select city..."
-                        onChange={onChangeHendler} required/>
+                        <input type="text" name="city" value={city} placeholder="select city..." required
+                        onChange={onChangeHendler} />
+                        { messageError && toggleCity ? <Alert messageError={messageError} displayError={displayError} /> : null}
                     </div>
                     <div className="salary">
                         <label>Salary</label>
@@ -164,6 +223,7 @@ const EmployeeForm = () => {
                 </button>
             </form>            
         </div>
+        </Fragment>
     )
 }
 

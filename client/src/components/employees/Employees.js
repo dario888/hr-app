@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Typed from 'react-typed'
+// import Typed from 'react-typed'
 
 import {getEmployees} from '../../actions/employeesActions'
 import EmployeeForm from './EmployeeForm';
@@ -22,11 +22,11 @@ const Employee = () => {
         //eslint-disable-next-line
     }, []);
 
-    useEffect(() => {
-        dispatch(getEmployees());
+    // useEffect(() => {!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     dispatch(getEmployees());
 
-        //eslint-disable-next-line
-    }, [employeesList]);
+    //     //eslint-disable-next-line
+    // }, [employeesList]);
 
 
 
@@ -35,6 +35,7 @@ const Employee = () => {
     return (
         <div className={`employeesDiv ${displayTbl}`}>
             <EmployeeForm />  
+
             {
                 displayTbl 
                 ? <table className="empTable">
@@ -62,15 +63,12 @@ const Employee = () => {
                     </table> 
                     : <div id="typed">
                       <h1>
-                          <Typed strings={['Your list is empty, Please insert Employee']} typeSpeed={30}/>
+                          {/* <Typed strings={['Your list is empty, Please insert Employee']} typeSpeed={30}/> */}
                       </h1>
                     </div>
                      
             }        
-               
-            
-
-            
+   
         </div>
     )
 }

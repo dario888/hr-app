@@ -22,7 +22,7 @@ input{
   border:none;
   border-radius: 3px; 
   outline: none;
-  font-size: 12px;
+  font-size: 13px;
   padding: 0px 4px;
   width: 80%;
   height: 30px;
@@ -40,12 +40,6 @@ button{
 ::placeholder{
   color: #45bceb;
 }
-
-// .employeesDiv{
-//   margin: 0, 10px;
-// }
-
-
 
 //-------------------------------------EMPLOYEES-----------------------------------------------
 .employeesDiv{
@@ -72,7 +66,7 @@ button{
 .formEmp{
   display: flex;
   flex-direction: column;
-  padding: 40px 80px;
+  padding: 25px 80px;
   
   input{
     background: $inputFormBg;
@@ -107,6 +101,23 @@ button{
 
 }
 
+.divError{
+  color: #d85353;
+  font-size: 10.5px;
+}
+// .divError{
+//   position: relative;
+//   text-align: center;
+//   padding: 10px 20px;
+//   width: 40%;
+//   border-radius: 10px;
+//   margin: 0 auto;
+//   margin-bottom: 20px;
+//   background: #d85353;
+//   color: #f4f4f4;
+// }
+
+
 //-------------------------------------EMPLOYEES TABLE-----------------------------------------------
 
 .empTable{
@@ -129,10 +140,6 @@ button{
   }
 }
 
-// .empTblBody{
-
-// }
-
 #empEditBtn{
  @include tblButtons($tblBtnEdit);
   
@@ -147,7 +154,7 @@ button{
   @include tblButtons($tblBtnDel);
 
   &:hover{
-    box-shadow: 0 0 0 2px #24c70e;
+    box-shadow: 0 0 0 2px #ee950f;
     background: #d12222;
   }
 }
@@ -157,3 +164,9 @@ button{
   font-family: monospace;
   color: #d85353;
 }
+
+//===============================
+.displayNone{
+  display: none;
+}
+
