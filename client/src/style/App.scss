@@ -37,10 +37,85 @@ button{
 
 }
 
+ul{
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+a{
+  text-decoration: none;
+  color: #f4f4f4;
+  
+}
+
+
 ::placeholder{
   color: #45bceb;
 }
 
+.App{
+  height: 2000px;
+}
+
+//-------------------------------------SCROLL TO TOP-----------------------------------------------
+.scrollToTop{
+  position: fixed;
+  bottom: 15px;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #50a11a;
+  color: #0e3fc7;
+  cursor: pointer;
+  text-align: center;
+  z-index: 10;
+
+  &:hover{
+    background: #4b8823;
+    box-shadow: 0 0 0 2px #ee950f;
+  }
+
+}
+
+.icon{
+  margin: 8px auto;
+  font-size: 22px;
+}
+//-------------------------------------NAVBAR-----------------------------------------------
+.navbar{
+  background: rgba($color: #1d3964, $alpha: .8);
+  color: #f4f4f4;
+  height: 45px;
+  position: fixed; /* Make it stick/fixed */
+  top: 0; /* Stay on top */
+  width: 100%; /* Full width */
+  transition: top 0.6s; /* Transition effect when sliding down (and up) */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hideNav{
+  top: -45px;
+}
+
+.logo{
+  margin-left: 20px;
+}
+
+.divUl{
+  width: 40%;
+}
+
+.navItems{
+  display: flex;
+  justify-content: space-around;
+  
+  li{
+    display: inline;
+  }
+}
 //-------------------------------------EMPLOYEES-----------------------------------------------
 .employeesDiv{
   background: url('../assetes/tblemployee.jpg')no-repeat center center/cover;
