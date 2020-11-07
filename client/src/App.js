@@ -5,7 +5,7 @@ import store from './utility/store';
 //COMPONENTS
 import Employees from './components/employees/Employees';
 import Navbar from './components/Navbar';
-// import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 
 //STYLE
