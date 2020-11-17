@@ -15,8 +15,6 @@ const DepartmentSelector = ({departmentsList }) => {
         current: state.employees.current
     }))  
 
-
-
     // console.log(stateValue);
 
     const dispatch = useDispatch();

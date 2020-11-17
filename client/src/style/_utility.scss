@@ -16,6 +16,7 @@ $tblBtnEdit: #2493a7;
 $tblBtnDel:#bb2121;
 
 
+//Table Edit & Delete Btn
 @mixin tblButtons($colorBg) {
     padding: 5px 10px;
     background: $colorBg;

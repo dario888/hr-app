@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { NavLink } from 'react-router-dom'
 import {Fragment} from 'react';
 import ScrollToTop from './ScrollToTop';
 
@@ -39,13 +40,13 @@ const Navbar = () => {
     return (
         <Fragment > 
         <div className={`navbar ${!show ? 'hideNav' : null}`}>
-            <div className="logo">HR-APP</div>
+            <div className="logo">HR</div>
             <div className="divUl">
                 <ul className="navItems">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/employees">Employees</a></li>
-                    <li><a href="/logIn">Log In</a></li>
-                    <li><a href="/logIn">Sing In</a></li>
+                    <li><NavLink exact to="/">Home</NavLink ></li>
+                    <li><NavLink  exact to="/employees">Employees</NavLink ></li>
+                    <li><NavLink  exact to="/logIn">Log In</NavLink ></li>
+                    <li><NavLink  exact to="/logIn">Sing In</NavLink ></li>
                 </ul>
             </div> 
         </div>

@@ -1,11 +1,11 @@
-import React from 'react';
-import {Provider} from 'react-redux'
-import store from './utility/store';
+import React, {Fragment} from 'react';
+import { Switch, Route} from 'react-router-dom';
 
 //COMPONENTS
 import Employees from './components/employees/Employees';
 import Navbar from './components/Navbar';
-import ScrollToTop from './components/ScrollToTop';
+import Home from './components/Home';
+import Footer from './components/Footer';
 
 
 //STYLE
@@ -15,15 +15,17 @@ import './style/App.scss';
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Navbar />
-        <Employees />
+    <Fragment>
+      <Navbar />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/employees' component={Employees} />
+      </Switch>
+      <Footer />
+    </Fragment>
 
-       
-      </div>
-    </Provider>
-    
+  
+
   );
 }
 

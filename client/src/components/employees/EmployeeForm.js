@@ -46,6 +46,7 @@ const EmployeeForm = () => {
     // console.log(employee);
     // console.log(departmentVal);
 
+
     useEffect(() => {
         dispatch(getDepartmens());
         dispatch(getPositions());
