@@ -6,6 +6,7 @@ import Employees from './components/employees/Employees';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
+import Analytics from './components/Analytics';
 
 
 //STYLE
@@ -20,6 +21,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/employees' component={Employees} />
+        <Route exact path='/analytics' component={Analytics} />
       </Switch>
       <Footer />
     </Fragment>

@@ -45,6 +45,7 @@ const Navbar = () => {
                 <ul className="navItems">
                     <li><NavLink exact to="/">Home</NavLink ></li>
                     <li><NavLink  exact to="/employees">Employees</NavLink ></li>
+                    <li><NavLink  exact to="/analytics">Analytics</NavLink ></li>
                     <li><NavLink  exact to="/logIn">Log In</NavLink ></li>
                     <li><NavLink  exact to="/logIn">Sing In</NavLink ></li>
                 </ul>

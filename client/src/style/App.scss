@@ -48,6 +48,10 @@ a{
   
 }
 
+// p{
+//   margin: 0;
+// }
+
 
 ::placeholder{
   color: #45bceb;
@@ -190,8 +194,6 @@ a{
   text-align: left;
   display: flex;
   color: #1f1957;
-  // padding-top: 10px;
-  // clip-path: polygon(0% 0%, 100% 15%, 100% 100%, 0 85%);
 
   div{
     display: inline;
@@ -208,7 +210,105 @@ a{
   background:white;
 }
 
+//-------------------------------------Veritcal Timeline-----------------------------------------------
 
+.timelineContainer{
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6a84cc;
+  padding: 50px 0;
+  color: #f4f4f4;
+}
+
+.timeline{
+  width: 80%;
+  height: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+
+  li{
+    padding: 15px;
+    background: #483daf;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  h2, h5, p{
+    margin: 0;
+  }
+
+}
+
+.timelineContent p{
+  font-size: 16px;
+  line-height: 30px;
+}
+
+@media(min-width: 768px){
+
+  .timeline::before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+    height: 100%;
+    width: 2px;
+    background: #ee950f;
+  }
+
+  .timeline li{
+    width: 50%;
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  .timeline li:nth-child(odd){
+    float: left;
+    clear: right;
+    transform: translateX(-50px);
+    border-radius: 20px 0px 20px 20px;
+  }
+
+  .timeline li:nth-child(even){
+    float: right;
+    clear: left;
+    border-radius: 0px 20px 20px 20px;
+    transform: translateX(50px);
+  }
+  //--------------------//Cricele----------------------
+  .timeline li::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background: #a1cddf;
+  }
+
+  .timeline li:nth-child(odd)::after{
+    right: -30px;
+  }
+
+  .timeline li:nth-child(even)::after{
+    left: -30px;
+  }
+
+  .timeline li:hover::after{
+    background: #45bceb;
+  }
+
+  //-----------------------------
+  .date{
+    position: absolute;
+    top: -20px;
+  }
+
+}
 
 //-------------------------------------EMPLOYEES-----------------------------------------------
 .employeesDiv{
@@ -340,6 +440,8 @@ a{
 }
 
 .footer{
-  height: 100vh;
+  text-align: center;
+  background: #dad8d8;
+  height: 50vh;
+  padding: 20px 0;
 }
-
