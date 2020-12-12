@@ -72,12 +72,20 @@ a{
   cursor: pointer;
   text-align: center;
   z-index: 10;
+  transform: translateY(-80px);
+  opacity: 0;
 
   &:hover{
     background: #4b8823;
     box-shadow: 0 0 0 2px #ee950f;
   }
 
+}
+
+
+.show{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .icon{

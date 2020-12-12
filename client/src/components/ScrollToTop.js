@@ -21,12 +21,11 @@ const ScrollToTop = ({scrollPos}) => {
         //eslint-disable-next-line  
     }, [scrollPos])
 
-    if (!visible)return null;
     
 
 
     return (
-        <div className="scrollToTop" onClick={scrollToTopHendler}>
+        <div className={`scrollToTop ${visible ? 'show' : null}`} onClick={scrollToTopHendler}>
             <i className="icon fas fa-chevron-up" ></i>
         </div>
     )
